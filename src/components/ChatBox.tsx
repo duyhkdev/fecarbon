@@ -124,7 +124,9 @@ const ChatBox: React.FC = () => {
                   {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
                 </div>
           
-                <ReactMarkdown remarkPlugins={[remarkMath]}>{msg.text}</ReactMarkdown>
+                <ReactMarkdown remarkPlugins={[remarkMath]} rehypePlugins={[rehypeKatex]}>
+                  {msg.text}
+                </ReactMarkdown>
               </div>
             </List.Item>
           )}
