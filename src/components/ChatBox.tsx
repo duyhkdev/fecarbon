@@ -110,7 +110,8 @@ const ChatBox: React.FC = () => {
                   <Spin size="small" />
                 ) : (
                   <span>
-                    <strong>{msg.sender === "User" ? "Bạn" : "Bot"}:</strong> {msg}
+                    <strong>{msg.sender === "User" ? "Bạn" : "Bot"}:</strong>{" "}
+                    <span dangerouslySetInnerHTML={{ __html: msg.text }} />
                   </span>
                 )}
               </div>
