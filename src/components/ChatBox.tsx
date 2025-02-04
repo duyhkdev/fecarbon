@@ -3,9 +3,9 @@ import { Input, Button, List, Tooltip, message, Spin } from "antd";
 import { SendOutlined, PaperClipOutlined, FileOutlined, GlobalOutlined } from "@ant-design/icons";
 import { sendMessage } from "../services/api";
 import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css"; // Import KaTeX styles
+// import remarkMath from "remark-math";
+// import rehypeKatex from "rehype-katex";
+// import "katex/dist/katex.min.css"; // Import KaTeX styles
 
 const { TextArea } = Input;
 
@@ -124,15 +124,7 @@ const ChatBox: React.FC = () => {
                   {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
                 </div>
           
-                <ReactMarkdown
-                  remarkPlugins={[remarkMath]}
-                  rehypePlugins={[rehypeKatex]}
-                  components={{
-                    p: ({ node, children }) => <p style={{ margin: 0 }}>{children}</p>,
-                  }}
-                >
-                  {msg.text}
-                </ReactMarkdown>
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
               </div>
             </List.Item>
           )}
