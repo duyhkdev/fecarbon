@@ -86,37 +86,52 @@ const ChatBox: React.FC = () => {
               </div>
             ),
           }}
-          renderItem={(msg, index) => (
-            <List.Item
-              key={index}
+         renderItem={(msg, index) => (
+          <List.Item
+            key={index}
+            style={{
+              display: "flex",
+              justifyContent: msg.sender === "User" ? "flex-end" : "flex-start",
+              margin: "5px 0",
+            }}
+          >
+            <div
               style={{
-                display: "flex",
-                justifyContent: msg.sender === "User" ? "flex-end" : "flex-start",
-                margin: "5px 0",
+                backgroundColor: msg.sender === "User" ? "#0078d7" : "#333",
+                color: "#fff",
+                padding: "10px",
+                borderRadius: "8px",
+                maxWidth: "70%",
+                wordWrap: "break-word",
+                textAlign: "left",
               }}
             >
-              <div
-                style={{
-                  backgroundColor: msg.sender === "User" ? "#0078d7" : "#333",
-                  color: "#fff",
-                  padding: "10px",
-                  borderRadius: "8px",
-                  maxWidth: "70%",
-                  wordWrap: "break-word",
-                  textAlign: msg.sender === "User" ? "right" : "left",
-                }}
-              >
-                {msg.text === "..." && msg.sender === "TCCV Bot" ? (
-                  <Spin size="small" />
-                ) : (
-                  <span>
-                    <strong>{msg.sender === "User" ? "Bạn" : "TCCV Bot"}:</strong>{" "}
-                    <span dangerouslySetInnerHTML={{ __html: msg.text }} />
-                  </span>
-                )}
-              </div>
-            </List.Item>
-          )}
+              {msg.text === "..." && msg.sender === "TCCV Bot" ? (
+                <Spin size="small" />
+              ) : (
+                <div>
+                  {/* Sender name box with distinct style */}
+                  <div
+                    style={{
+                      backgroundColor: msg.sender === "User" ? "#005bb5" : "#444", // Different colors for User & Bot
+                      color: "#fff",
+                      padding: "5px 10px",
+                      borderRadius: "5px",
+                      fontWeight: "bold",
+                      display: "inline-block",
+                      marginBottom: "5px",
+                    }}
+                  >
+                    {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
+                  </div>
+                  {/* Message Content */}
+                  <div dangerouslySetInnerHTML={{ __html: msg.text }} />
+                </div>
+              )}
+            </div>
+          </List.Item>
+        )}
+
         />
         <div ref={messagesEndRef} />
       </div>
