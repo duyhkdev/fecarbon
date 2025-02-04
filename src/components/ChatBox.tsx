@@ -22,10 +22,10 @@ const ChatBox: React.FC = () => {
 
     try {
       const response = await sendMessage(input);
-      setMessages((prev) => [...prev, { sender: "Bot", text: response.response }]);
+      setMessages((prev) => [...prev, { sender: "TCCV Bot", text: response.response }]);
     } catch (error) {
       console.error("Error sending message:", error);
-      setMessages((prev) => [...prev, { sender: "Bot", text: "Lỗi khi gửi tin nhắn." }]);
+      setMessages((prev) => [...prev, { sender: "TCCV Bot", text: "Lỗi khi gửi tin nhắn." }]);
     } finally {
       setIsTyping(false);
     }
@@ -73,7 +73,7 @@ const ChatBox: React.FC = () => {
         }}
       >
         <List
-          dataSource={[...messages, ...(isTyping ? [{ sender: "Bot", text: "..." }] : [])]}
+          dataSource={[...messages, ...(isTyping ? [{ sender: "TCCV Bot", text: "..." }] : [])]}
           locale={{
             emptyText: (
               <div style={{ textAlign: "center", color: "#fff" }}>
@@ -106,11 +106,11 @@ const ChatBox: React.FC = () => {
                   textAlign: msg.sender === "User" ? "right" : "left",
                 }}
               >
-                {msg.text === "..." && msg.sender === "Bot" ? (
+                {msg.text === "..." && msg.sender === "TCCV Bot" ? (
                   <Spin size="small" />
                 ) : (
                   <span>
-                    <strong>{msg.sender === "User" ? "Bạn" : "Bot"}:</strong>{" "}
+                    <strong>{msg.sender === "User" ? "Bạn" : "TCCV Bot"}:</strong>{" "}
                     <span dangerouslySetInnerHTML={{ __html: msg.text }} />
                   </span>
                 )}
