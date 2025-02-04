@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Input, Button, List, Tooltip, message, Spin } from "antd";
 import { SendOutlined, PaperClipOutlined, FileOutlined, GlobalOutlined } from "@ant-design/icons";
 import { sendMessage } from "../services/api";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css"; // Import KaTeX styles
 
 const { TextArea } = Input;
 
