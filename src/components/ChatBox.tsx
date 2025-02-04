@@ -2,10 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Input, Button, List, Tooltip, message, Spin } from "antd";
 import { SendOutlined, PaperClipOutlined, FileOutlined, GlobalOutlined } from "@ant-design/icons";
 import { sendMessage } from "../services/api";
-import ReactMarkdown from "react-markdown";
-import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css"; // Import KaTeX styles
 
 const { TextArea } = Input;
 
@@ -90,53 +86,52 @@ const ChatBox: React.FC = () => {
               </div>
             ),
           }}
-         renderItem={(msg, index) => (
-          <List.Item
-            key={index}
-            style={{
-              display: "flex",
-              justifyContent: msg.sender === "User" ? "flex-end" : "flex-start",
-              margin: "5px 0",
-            }}
-          >
-            <div
+          renderItem={(msg, index) => (
+            <List.Item
+              key={index}
               style={{
-                backgroundColor: msg.sender === "User" ? "#0078d7" : "#333",
-                color: "#fff",
-                padding: "10px",
-                borderRadius: "8px",
-                maxWidth: "70%",
-                wordWrap: "break-word",
-                textAlign: "left",
+                display: "flex",
+                justifyContent: msg.sender === "User" ? "flex-end" : "flex-start",
+                margin: "5px 0",
               }}
             >
               <div
                 style={{
-                  backgroundColor: msg.sender === "User" ? "#005bb5" : "#444",
+                  backgroundColor: msg.sender === "User" ? "#0078d7" : "#333",
                   color: "#fff",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  fontWeight: "bold",
-                  display: "inline-block",
-                  marginBottom: "5px",
+                  padding: "10px",
+                  borderRadius: "8px",
+                  maxWidth: "70%",
+                  wordWrap: "break-word",
+                  textAlign: "left",
                 }}
               >
-                {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
+                <div
+                  style={{
+                    backgroundColor: msg.sender === "User" ? "#005bb5" : "#444",
+                    color: "#fff",
+                    padding: "5px 10px",
+                    borderRadius: "5px",
+                    fontWeight: "bold",
+                    display: "inline-block",
+                    marginBottom: "5px",
+                  }}
+                >
+                  {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
+                </div>
+          
+                <ReactMarkdown
+                  remarkPlugins={[remarkMath]}
+                  rehypePlugins={[rehypeKatex]}
+                  components={{
+                    p: ({ node, children }) => <p style={{ margin: 0 }}>{children}</p>,
+                  }}
+                >
+                  {msg.text}
+                </ReactMarkdown>
               </div>
-        
-              <ReactMarkdown
-                remarkPlugins={[remarkMath]}
-                rehypePlugins={[rehypeKatex]}
-                components={{
-                  p: ({ node, children }) => <p style={{ margin: 0 }}>{children}</p>,
-                }}
-              >
-                {msg.text}
-              </ReactMarkdown>
-            </div>
-          </List.Item>
-        )}
-
+            </List.Item>
+          )}
         />
         <div ref={messagesEndRef} />
       </div>
