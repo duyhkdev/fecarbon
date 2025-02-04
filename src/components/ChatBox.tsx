@@ -128,8 +128,6 @@ const ChatBox: React.FC = () => {
                   remarkPlugins={[remarkMath]} 
                   rehypePlugins={[rehypeKatex]} 
                   breaks={true} 
-                  skipHtml={false} // ✅ Allows Markdown formatting
-                  escapeHtml={false} // ✅ Prevents escaping characters like "#"
                 >
                   {msg.text}
                 </ReactMarkdown>
