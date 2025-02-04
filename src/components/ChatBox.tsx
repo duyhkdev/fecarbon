@@ -127,7 +127,6 @@ const ChatBox: React.FC = () => {
                <ReactMarkdown 
                   remarkPlugins={[remarkMath]} 
                   rehypePlugins={[rehypeKatex]} 
-                  breaks={true} 
                 >
                   {msg.text}
                 </ReactMarkdown>
