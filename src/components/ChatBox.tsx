@@ -128,7 +128,7 @@ const ChatBox: React.FC = () => {
                   remarkPlugins={[remarkMath]} 
                   rehypePlugins={[rehypeKatex]} 
                 >
-                  {msg.text}
+                  {msg.text.replace(/\n/g, "  \n")}
                 </ReactMarkdown>
 
               </div>
