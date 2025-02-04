@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import { Input, Button, List, Tooltip, message, Spin } from "antd";
 import { SendOutlined, PaperClipOutlined, FileOutlined, GlobalOutlined } from "@ant-design/icons";
 import { sendMessage } from "../services/api";
+import ReactMarkdown from "react-markdown";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import "katex/dist/katex.min.css"; // Import KaTeX styles
 
 const { TextArea } = Input;
 
@@ -106,28 +110,29 @@ const ChatBox: React.FC = () => {
                 textAlign: "left",
               }}
             >
-              {msg.text === "..." && msg.sender === "TCCV Bot" ? (
-                <Spin size="small" />
-              ) : (
-                <div>
-                  {/* Sender name box with distinct style */}
-                  <div
-                    style={{
-                      backgroundColor: msg.sender === "User" ? "#005bb5" : "#444", // Different colors for User & Bot
-                      color: "#fff",
-                      padding: "5px 10px",
-                      borderRadius: "5px",
-                      fontWeight: "bold",
-                      display: "inline-block",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
-                  </div>
-                  {/* Message Content */}
-                  <div dangerouslySetInnerHTML={{ __html: msg.text }} />
-                </div>
-              )}
+              <div
+                style={{
+                  backgroundColor: msg.sender === "User" ? "#005bb5" : "#444",
+                  color: "#fff",
+                  padding: "5px 10px",
+                  borderRadius: "5px",
+                  fontWeight: "bold",
+                  display: "inline-block",
+                  marginBottom: "5px",
+                }}
+              >
+                {msg.sender === "User" ? "Bạn" : "TCCV Bot"}
+              </div>
+        
+              <ReactMarkdown
+                remarkPlugins={[remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+                components={{
+                  p: ({ node, children }) => <p style={{ margin: 0 }}>{children}</p>,
+                }}
+              >
+                {msg.text}
+              </ReactMarkdown>
             </div>
           </List.Item>
         )}
